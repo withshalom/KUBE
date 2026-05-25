@@ -8,22 +8,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap');
 
 :root {
-  --void:       #07100a;
-  --panel:      #0b1410;
-  --panel2:     #0f1a12;
-  --hover:      #162418;
-  --border:        #1a2e1e;
-  --border-hi: #235030;
-  --accent:        #00e87a;
-  --accent-dim:    #009950;
-  --accent-glow:   rgba(0,232,122,0.14);
-  --green:         #a8ff78;
-  --green-dim:     #5db84a;
+  --void:       #040a06;
+  --panel:      #080f09;
+  --panel2:     #0c1510;
+  --hover:      #111e13;
+  --border:        #142316;
+  --border-hi: #1e3a22;
+  --accent:        #3d7a4a;
+  --accent-dim:    #2a5435;
+  --accent-glow:   rgba(61,122,74,0.18);
+  --green:         #5ddb8c;
+  --green-dim:     #3aaa66;
   --amber:         #ffaa00;
   --red:           #ff4455;
-  --t1:  #cdddd4;
-  --t2:#6a9078;
-  --t3:      #375040;
+  --t1:  #c8deca;
+  --t2:#5a9468;
+  --t3:      #2a3d2e;
   --fm:     'Fira Code', monospace;
   --fd:       'Syne', sans-serif;
   --sidebar-w:     228px;
@@ -40,7 +40,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 /* ── TOPBAR ── */
 #topbar { grid-column:1/-1; display:flex; align-items:center; background:var(--panel); border-bottom:1px solid var(--border); padding:0 12px; position:relative; z-index:30; }
 .brand { display:flex; align-items:center; gap:8px; margin-right:20px; font-family:var(--fm); font-weight:700; font-size:14px; color:var(--accent); letter-spacing:0.04em; user-select:none; }
-.brand-dot { width:6px; height:6px; background:var(--accent); border-radius:50%; box-shadow:0 0 6px var(--accent); }
+.brand-dot { width:6px; height:6px; background:var(--accent); border-radius:50%; box-shadow:0 0 8px rgba(61,122,74,0.7); }
 .brand-sub { font-size:9px; color:var(--t3); letter-spacing:0.12em; text-transform:uppercase; font-weight:400; }
 .tb-menu { display:flex; align-items:center; }
 .tb-menu-item { padding:0 12px; height:var(--toolbar-h); display:flex; align-items:center; font-size:12px; color:var(--t2); cursor:pointer; transition:color 0.15s,background 0.15s; letter-spacing:0.02em; position:relative; }
@@ -120,7 +120,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 #main-canvas { display:block; }
 
 /* ── SNAP INDICATOR ── */
-.snap-ring { position:absolute; pointer-events:none; width:12px; height:12px; border:1.5px solid var(--accent); border-radius:50%; box-shadow:0 0 6px var(--accent); transform:translate(-50%,-50%); display:none; }
+.snap-ring { position:absolute; pointer-events:none; width:12px; height:12px; border:1.5px solid var(--accent); border-radius:50%; box-shadow:0 0 8px rgba(61,122,74,0.7); transform:translate(-50%,-50%); display:none; }
 
 /* ── COORD OVERLAY ── */
 #coord-overlay { position:absolute; bottom:8px; right:8px; background:rgba(8,10,14,0.88); border:1px solid var(--border); backdrop-filter:blur(4px); padding:5px 10px; border-radius:4px; font-family:var(--fm); font-size:11px; color:var(--t2); pointer-events:none; display:flex; gap:12px; letter-spacing:0.04em; }
@@ -158,7 +158,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 
 /* ── DYNAMIC INPUT ── */
 #dyn-input-wrap { position:absolute; display:none; z-index:80; pointer-events:auto; }
-#dyn-input-box { background:var(--panel); border:1px solid var(--accent); border-radius:3px; box-shadow:0 0 12px rgba(0,232,122,0.28),0 2px 8px rgba(0,0,0,0.7); display:flex; align-items:center; min-width:170px; overflow:hidden; }
+#dyn-input-box { background:var(--panel); border:1px solid var(--accent); border-radius:3px; box-shadow:0 0 12px rgba(61,122,74,0.24),0 2px 8px rgba(0,0,0,0.7); display:flex; align-items:center; min-width:170px; overflow:hidden; }
 #dyn-input-prefix { background:var(--panel2); border-right:1px solid var(--border); padding:5px 7px; font-family:var(--fm); font-size:9px; color:var(--accent); letter-spacing:0.05em; white-space:nowrap; flex-shrink:0; min-width:42px; text-align:center; }
 #dyn-input-field { background:transparent; border:none; outline:none; padding:5px 8px; font-family:var(--fm); font-size:11px; color:var(--t1); width:130px; caret-color:var(--accent); }
 #dyn-input-field::placeholder { color:var(--t3); }
@@ -168,7 +168,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 #dyn-input-hint em { color:var(--green); font-style:normal; }
 
 /* ── CONTEXT MENU ── */
-#ctx-menu { position:fixed; display:none; flex-direction:column; background:var(--panel); border:1px solid var(--border-hi); border-radius:5px; box-shadow:0 10px 36px rgba(0,0,0,0.75),0 0 0 1px rgba(0,232,122,0.05); min-width:200px; z-index:500; overflow:hidden; padding:4px 0; }
+#ctx-menu { position:fixed; display:none; flex-direction:column; background:var(--panel); border:1px solid var(--border-hi); border-radius:5px; box-shadow:0 10px 36px rgba(0,0,0,0.75),0 0 0 1px rgba(61,122,74,0.07); min-width:200px; z-index:500; overflow:hidden; padding:4px 0; }
 #ctx-menu.open { display:flex; }
 .ctx-head { padding:4px 12px 3px; font-family:var(--fm); font-size:8px; color:var(--t3); letter-spacing:0.14em; text-transform:uppercase; }
 .ctx-item { display:flex; align-items:center; gap:10px; padding:7px 14px; font-family:var(--fm); font-size:11px; color:var(--t2); cursor:pointer; transition:background 0.1s,color 0.1s; border:none; background:none; width:100%; text-align:left; }
@@ -176,11 +176,11 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 .ctx-item svg { width:13px; height:13px; flex-shrink:0; opacity:0.7; }
 .ctx-item .ctx-key { margin-left:auto; font-size:9px; color:var(--t3); }
 .ctx-item.hi { color:var(--accent); }
-.ctx-item.hi:hover { background:rgba(0,232,122,0.08); }
+.ctx-item.hi:hover { background:rgba(61,122,74,0.10); }
 .ctx-sep { height:1px; background:var(--border); margin:3px 0; }
 
 /* ── RECT DRAG PREVIEW ── */
-#rect-preview { position:absolute; pointer-events:none; border:1px dashed var(--accent); background:rgba(0,232,122,0.04); display:none; }
+#rect-preview { position:absolute; pointer-events:none; border:1px dashed var(--accent); background:rgba(61,122,74,0.06); display:none; }
 
 /* ── ROTATION BAR ── */
 #rotate-bar {
@@ -269,9 +269,10 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 }
 .vm-seg svg { width: 10px; height: 10px; flex-shrink: 0; }
 .vm-seg.active {
-  background: var(--accent);
-  color: var(--void);
+  background: #1e3a22;
+  color: #5ddb8c;
   font-weight: 700;
+  border-left: 2px solid #3d7a4a;
 }
 .vm-divider { width: 1px; background: var(--border-hi); align-self: stretch; }
 
@@ -302,7 +303,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
   background: var(--panel);
   border: 1px solid var(--border-hi);
   border-radius: 6px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(0,232,122,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(61,122,74,0.10);
   width: 460px; max-width: 95vw;
   font-family: var(--fm);
   overflow: hidden;
@@ -342,7 +343,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
   font-size: 9px; padding: 2px 8px; border-radius: 10px;
   border: 1px solid; letter-spacing: 0.08em; font-weight: 600;
 }
-.fmt-pill.stl { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-glow); }
+.fmt-pill.stl { color: #5ddb8c; border-color: #2a5435; background: rgba(61,122,74,0.10); }
 .fmt-pill.step { color: var(--amber); border-color: #a07000; background: rgba(255,170,0,0.08); }
 .fmt-pill.dxf  { color: var(--green); border-color: var(--green-dim); background: rgba(168,255,120,0.07); }
 .import3d-file-info {
@@ -399,8 +400,8 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 #viewport-mode-label .vml-dot {
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 5px var(--accent);
+  background: #3d7a4a;
+  box-shadow: 0 0 4px rgba(61,122,74,0.5);
   flex-shrink: 0;
 }
 /* ── DXF IMPORT DIALOG ── */
@@ -416,7 +417,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
   background: var(--panel);
   border: 1px solid var(--border-hi);
   border-radius: 6px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,232,122,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(61,122,74,0.10);
   width: 420px; max-width: 95vw;
   font-family: var(--fm);
   overflow: hidden;
@@ -502,9 +503,9 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 .dlg-btn.commit {
   background: var(--accent); border-color: var(--accent);
   color: var(--void); font-weight: 700;
-  box-shadow: 0 0 12px rgba(0,232,122,0.22);
+  box-shadow: 0 0 12px rgba(61,122,74,0.20);
 }
-.dlg-btn.commit:hover { background: #33ff99; box-shadow: 0 0 18px rgba(0,232,122,0.36); }
+.dlg-btn.commit:hover { background: #5ddb8c; box-shadow: 0 0 18px rgba(61,122,74,0.30); }
 /* ── STARTUP UNIT SPLASH ── */
 #splash-overlay {
   position: fixed; inset: 0;
@@ -518,7 +519,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
   background: var(--panel);
   border: 1px solid var(--border-hi);
   border-radius: 8px;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(0,232,122,0.1);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(61,122,74,0.12);
   width: 400px; max-width: 95vw;
   font-family: var(--fm);
   overflow: hidden;
@@ -566,7 +567,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
-.splash-unit-btn.mm-btn:hover  { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,232,122,0.14); }
+.splash-unit-btn.mm-btn:hover  { border-color: var(--accent); box-shadow: 0 4px 16px rgba(61,122,74,0.18); }
 .splash-unit-btn.in-btn:hover  { border-color: var(--amber);  box-shadow: 0 4px 16px rgba(255,170,0,0.15); }
 .splash-unit-btn .sub-unit {
   font-size: 28px; font-weight: 700; letter-spacing: 0.02em;
@@ -591,9 +592,9 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 #offset-popup {
   position: absolute;
   background: var(--panel);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--border-hi);
   border-radius: 5px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,232,122,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(61,122,74,0.12);
   width: 230px;
   font-family: var(--fm);
   overflow: hidden;
@@ -623,6 +624,111 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
 .op-hint b { color: var(--t2); }
 .op-actions { display: flex; gap: 6px; }
 .op-actions .dlg-btn { flex: 1; padding: 6px 8px; font-size: 9px; }
+
+/* ── PHASE 2: 3D VIEWPORT OVERLAYS ── */
+#webgpu-status {
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(7,16,10,0.88); border: 1px solid var(--border-hi);
+  border-radius: 4px; padding: 4px 10px;
+  font-family: var(--fm); font-size: 9px; color: var(--t3);
+  pointer-events: none; display: flex; align-items: center; gap: 6px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+#webgpu-status .gpu-dot {
+  width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+  background: var(--t3); box-shadow: none;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#webgpu-status.gpu-ok .gpu-dot  { background: #3d7a4a; box-shadow: 0 0 4px rgba(61,122,74,0.6); }
+#webgpu-status.gpu-fb .gpu-dot  { background: var(--amber);  box-shadow: 0 0 5px var(--amber); }
+#webgpu-status.gpu-err .gpu-dot { background: var(--red);    box-shadow: 0 0 5px var(--red); }
+
+/* Orbit hint overlay */
+#orbit-hint {
+  position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%);
+  background: rgba(7,16,10,0.82); border: 1px solid var(--border);
+  border-radius: 4px; padding: 4px 12px;
+  font-size: 9px; font-family: var(--fm); color: var(--t3);
+  pointer-events: none; white-space: nowrap; letter-spacing: 0.05em;
+  display: none;
+}
+#orbit-hint.visible { display: block; }
+#orbit-hint span { color: var(--accent); }
+
+/* 3D axis gizmo */
+#axis-gizmo {
+  position: absolute; bottom: 44px; right: 12px;
+  width: 72px; height: 72px; pointer-events: none;
+}
+
+/* View preset buttons */
+#view-presets {
+  position: absolute; top: 36px; right: 8px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.vp-btn {
+  background: rgba(11,20,16,0.88); border: 1px solid var(--border);
+  border-radius: 3px; color: var(--t3); font-family: var(--fm);
+  font-size: 8px; padding: 4px 7px; cursor: pointer;
+  transition: all 0.12s; letter-spacing: 0.06em;
+  text-transform: uppercase; text-align: center; min-width: 42px;
+}
+.vp-btn:hover { background: var(--hover); border-color: var(--border-hi); color: var(--t1); }
+.vp-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+/* 3D selection info */
+#sel3d-info {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(7,16,10,0.88); border: 1px solid var(--border);
+  border-radius: 4px; padding: 6px 10px;
+  font-family: var(--fm); font-size: 9px; color: var(--t2);
+  pointer-events: none; display: none; letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+#sel3d-info.visible { display: block; }
+#sel3d-info .si-title { color: var(--accent); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3px; }
+
+/* Push-pull depth input */
+#pushpull-input {
+  position: absolute; display: none;
+  background: var(--panel); border: 1px solid var(--border-hi);
+  border-radius: 4px; padding: 0; overflow: hidden;
+  box-shadow: 0 0 16px rgba(61,122,74,0.16), 0 4px 16px rgba(0,0,0,0.6);
+  z-index: 80; min-width: 180px;
+  font-family: var(--fm);
+}
+#pushpull-input.visible { display: block; }
+#pushpull-head {
+  background: var(--panel2); border-bottom: 1px solid var(--border);
+  padding: 5px 10px; font-size: 9px; color: var(--accent);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+}
+#pushpull-body { padding: 8px 10px; display: flex; align-items: center; gap: 6px; }
+#pushpull-field {
+  background: transparent; border: none; outline: none;
+  color: var(--t1); font-family: var(--fm); font-size: 13px;
+  width: 100px; caret-color: var(--accent);
+}
+#pushpull-unit { font-size: 10px; color: var(--t3); }
+
+/* STL mesh info panel */
+#mesh-info {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(7,16,10,0.9); border: 1px solid var(--border-hi);
+  border-radius: 4px; padding: 8px 12px;
+  font-family: var(--fm); font-size: 9px; color: var(--t2);
+  pointer-events: none; display: none;
+  line-height: 1.7; letter-spacing: 0.04em;
+}
+#mesh-info.visible { display: block; }
+#mesh-info .mi-title { color: var(--accent); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+#mesh-info .mi-val   { color: var(--t1); }
+
+/* 3D coord overlay extension */
+#coord-overlay-3d { display: none; }
+#coord-overlay-3d.visible { display: flex; }
+
 </style>
 </head>
 <body>
@@ -669,6 +775,12 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
         <div class="tb-dd-item" onclick="toggleSnap();closeMenus()">Toggle Snap<span class="dd-key">F3</span></div>
         <div class="tb-dd-sep"></div>
         <div class="tb-dd-item" onclick="toggleUnits();closeMenus()">Toggle mm / in<span class="dd-key">U</span></div>
+        <div class="tb-dd-sep"></div>
+        <div class="tb-dd-item" onclick="setView3D('iso');closeMenus()">Isometric View<span class="dd-key">Num7</span></div>
+        <div class="tb-dd-item" onclick="setView3D('top');closeMenus()">Top View<span class="dd-key">Num1</span></div>
+        <div class="tb-dd-item" onclick="setView3D('front');closeMenus()">Front View<span class="dd-key">Num3</span></div>
+        <div class="tb-dd-item" onclick="setView3D('right');closeMenus()">Right View<span class="dd-key">Num5</span></div>
+        <div class="tb-dd-item" onclick="toggleProjection();closeMenus()">Perspective / Ortho<span class="dd-key">Num0</span></div>
       </div>
     </div>
     <div class="tb-menu-item" id="menu-draw" onmouseenter="openMenu('draw')" onmouseleave="scheduleClose()">Draw
@@ -762,6 +874,10 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
       <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19 L5 8 Q5 5 8 5 L19 5"/></svg></div>
       <span class="tool-label">FILLET</span>
     </button>
+    <button class="tool-btn" id="btn-pushpull" onclick="setTool('pushpull');activatePushPull()" title="Push/Pull face (3D)">
+      <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/><rect x="4" y="3" width="16" height="4" rx="1"/></svg></div>
+      <span class="tool-label">PUSH/PULL</span>
+    </button>
   </div>
 
   <!-- Rotation controls (shown when rotate tool is active OR objects are selected) -->
@@ -820,11 +936,11 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
       Import .dxf
     </button>
     <input type="file" id="load-dxf" accept=".dxf,.DXF" onchange="importDXF(event)">
-    <button class="op-btn" style="color:var(--accent);border-color:var(--accent-dim);" onclick="openImport3D()">
+    <button class="op-btn" style="color:#5ddb8c;border-color:#2a5435;" onclick="openImport3D()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L3 8.5l9 5.5 9-5.5z"/><path d="M3 15.5l9 5.5 9-5.5"/><path d="M3 8.5v7M21 8.5v7"/></svg>
       Import .stl / .step
     </button>
-    <button class="op-btn" style="color:var(--accent);border-color:var(--accent-dim);" onclick="exportSTL()">
+    <button class="op-btn" style="color:#5ddb8c;border-color:#2a5435;" onclick="exportSTL()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Export .stl
     </button>
@@ -856,7 +972,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
     <div class="prop-row"><span class="prop-key">Zoom</span><span class="prop-val" id="prop-zoom">3.00×</span></div>
     <div class="prop-row"><span class="prop-key">Snap</span><span class="prop-val green" id="prop-snap">ON</span></div>
     <div class="prop-row"><span class="prop-key">Grid</span><span class="prop-val green" id="prop-grid-st">ON</span></div>
-    <div class="prop-row" style="margin-top:6px;"><span class="prop-key">Layer</span><span class="prop-val"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00e87a;box-shadow:0 0 4px #00e87a;margin-right:4px;"></span>Layer_0</span></div>
+    <div class="prop-row" style="margin-top:6px;"><span class="prop-key">Layer</span><span class="prop-val"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#3d7a4a;box-shadow:0 0 4px #3d7a4a;margin-right:4px;"></span>Layer_0</span></div>
   </div>
 </div>
 
@@ -882,6 +998,45 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--void); c
     <span class="coord-label" id="coord-unit-lbl">mm</span>
   </div>
   <div id="hint">Press <span>L</span> Line · <span>A</span> Arc · <span>C</span> Circle · <span>R</span> Rect · <span>P</span> Poly · <span>F</span> Fillet · Right-click</div>
+
+  <!-- Phase 2: 3D overlays -->
+  <div id="webgpu-status"><div class="gpu-dot"></div><span id="gpu-label">Initialising…</span></div>
+
+  <div id="view-presets">
+    <button class="vp-btn"        id="vp-iso"   onclick="setView3D('iso')">ISO</button>
+    <button class="vp-btn active" id="vp-top"   onclick="setView3D('top')">TOP</button>
+    <button class="vp-btn"        id="vp-front" onclick="setView3D('front')">FRT</button>
+    <button class="vp-btn"        id="vp-right" onclick="setView3D('right')">RGT</button>
+    <button class="vp-btn"        id="vp-persp" onclick="toggleProjection()">PERSP</button>
+  </div>
+
+  <canvas id="axis-gizmo"></canvas>
+
+  <div id="orbit-hint" class="visible">
+    <span>Left-drag</span> orbit &nbsp;·&nbsp; <span>Mid-drag</span> pan &nbsp;·&nbsp; <span>Scroll</span> zoom &nbsp;·&nbsp; <span>Tab</span> solid/mesh
+  </div>
+
+  <div id="mesh-info">
+    <div class="mi-title">Loaded Mesh</div>
+    <div>Triangles <span class="mi-val" id="mi-tris">—</span></div>
+    <div>Vertices  <span class="mi-val" id="mi-verts">—</span></div>
+    <div>Bbox W    <span class="mi-val" id="mi-w">—</span></div>
+    <div>Bbox H    <span class="mi-val" id="mi-h">—</span></div>
+    <div>Bbox D    <span class="mi-val" id="mi-d">—</span></div>
+  </div>
+
+  <!-- Push-pull depth input -->
+  <div id="pushpull-input">
+    <div id="pushpull-head">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Push / Pull
+    </div>
+    <div id="pushpull-body">
+      <input id="pushpull-field" type="text" placeholder="depth" spellcheck="false" autocomplete="off"/>
+      <span id="pushpull-unit">mm</span>
+    </div>
+  </div>
+
 </div>
 
 <!-- STATUS BAR -->
@@ -2110,9 +2265,9 @@ function drawCirclePreview(){
   const sc=worldToScreen(circleState.cx,circleState.cy);
   const ep=snapActive&&snapPoint?snapPoint:mouseWorld;
   const r=Math.hypot(ep.x-circleState.cx,ep.y-circleState.cy)*cam.zoom;
-  ctx.save();ctx.strokeStyle='rgba(0,212,255,0.6)';ctx.lineWidth=1.2;ctx.setLineDash([5,4]);
+  ctx.save();ctx.strokeStyle='rgba(61,122,74,0.6)';ctx.lineWidth=1.2;ctx.setLineDash([5,4]);
   ctx.beginPath();ctx.arc(sc.x,sc.y,r,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
-  const sep=worldToScreen(ep.x,ep.y);ctx.strokeStyle='rgba(0,232,122,0.28)';ctx.lineWidth=1;
+  const sep=worldToScreen(ep.x,ep.y);ctx.strokeStyle='rgba(61,122,74,0.24)';ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(sc.x,sc.y);ctx.lineTo(sep.x,sep.y);ctx.stroke();
   drawDot(sc.x,sc.y,C.entity,3);ctx.restore();
 }
@@ -2120,7 +2275,7 @@ function drawCirclePreview(){
 function drawArcPreview(){
   if(activeTool!=='arc'||arcState.phase===0)return;
   const ep=snapActive&&snapPoint?snapPoint:mouseWorld;
-  ctx.save();ctx.strokeStyle='rgba(0,212,255,0.6)';ctx.lineWidth=1.2;ctx.setLineDash([5,4]);
+  ctx.save();ctx.strokeStyle='rgba(61,122,74,0.6)';ctx.lineWidth=1.2;ctx.setLineDash([5,4]);
   if(arcState.phase===1){
     const sp1=worldToScreen(arcState.p1.x,arcState.p1.y);
     const sep=worldToScreen(ep.x,ep.y);
@@ -2184,7 +2339,7 @@ function drawRotatePreview() {
     rotateState.previewDelta = delta;
 
     // Guide line pivot → cursor
-    ctx.strokeStyle = 'rgba(0,212,255,0.6)';
+    ctx.strokeStyle = 'rgba(61,122,74,0.6)';
     ctx.lineWidth   = 1;
     ctx.setLineDash([4,3]);
     ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(cur.x, cur.y); ctx.stroke();
@@ -2193,7 +2348,7 @@ function drawRotatePreview() {
     // Angle arc
     const radius = Math.hypot(cur.x - sp.x, cur.y - sp.y);
     if (radius > 12) {
-      ctx.strokeStyle = 'rgba(0,232,122,0.28)';
+      ctx.strokeStyle = 'rgba(61,122,74,0.24)';
       ctx.lineWidth   = 1;
       ctx.beginPath();
       ctx.arc(sp.x, sp.y, Math.min(radius*0.5, 36),
@@ -2203,14 +2358,14 @@ function drawRotatePreview() {
     }
 
     // Live angle readout
-    ctx.fillStyle = 'rgba(0,212,255,0.95)';
+    ctx.fillStyle = 'rgba(61,122,74,0.95)';
     ctx.font      = '10px Fira Code, monospace';
     ctx.fillText(delta.toFixed(2) + '°', cur.x + 14, cur.y - 8);
   }
 
   // Draw ghost of rotated selection if dragging angle
   if (rotateState.phase === 1 && rotateState.previewDelta !== 0) {
-    ctx.strokeStyle = 'rgba(0,212,255,0.22)';
+    ctx.strokeStyle = 'rgba(61,122,74,0.22)';
     ctx.lineWidth   = 1;
     ctx.setLineDash([3,3]);
     const rad = rotateState.previewDelta * Math.PI / 180;
@@ -2373,8 +2528,8 @@ function drawSelBox() {
   ctx.save();
   // Blue = left-to-right (crossing), green = right-to-left (window) — standard CAD convention
   const leftToRight = sb.x >= sa.x;
-  ctx.strokeStyle = leftToRight ? 'rgba(0,212,255,0.9)' : 'rgba(0,255,157,0.9)';
-  ctx.fillStyle   = leftToRight ? 'rgba(0,232,122,0.06)' : 'rgba(0,255,157,0.06)';
+  ctx.strokeStyle = leftToRight ? 'rgba(61,122,74,0.9)' : 'rgba(0,255,157,0.9)';
+  ctx.fillStyle   = leftToRight ? 'rgba(61,122,74,0.08)' : 'rgba(0,255,157,0.06)';
   ctx.lineWidth   = 1;
   if (!leftToRight) ctx.setLineDash([4,3]);
   ctx.fillRect(lx,ly,w,h);
@@ -2874,9 +3029,9 @@ function updateGridLabel() {
 
 // ── RENDER ──────────────────────────────────────────────
 const C={
-  bg:'#080a0e', grid:'#141c28', gridMaj:'#1c2535', axis:'#1e3348',
-  entity:'#00e87a', entitySel:'#ffaa00', point:'#ffaa00',
-  rubberLine:'#00e87a', startPt:'#00ff9d',
+  bg:'#040a06', grid:'#0d1f10', gridMaj:'#132b17', axis:'#1e3a22',
+  entity:'#4a9460', entitySel:'#5ddb8c', point:'#5ddb8c',
+  rubberLine:'#5ddb8c', startPt:'#5ddb8c',
 };
 
 function render() {
@@ -2900,23 +3055,33 @@ function drawGrid(W,H) {
   const x0=Math.floor(tl.x/spacing)*spacing, x1=Math.ceil(br.x/spacing)*spacing;
   const y0=Math.floor(br.y/spacing)*spacing, y1=Math.ceil(tl.y/spacing)*spacing;
 
-  ctx.lineWidth=1;
-  ctx.strokeStyle=C.grid; ctx.beginPath();
-  for(let x=x0;x<=x1;x+=spacing){ if(Math.round(x/spacing)%major!==0){ const sx=worldToScreen(x,0).x; ctx.moveTo(sx,0); ctx.lineTo(sx,H); } }
-  for(let y=y0;y<=y1;y+=spacing){ if(Math.round(y/spacing)%major!==0){ const sy=worldToScreen(0,y).y; ctx.moveTo(0,sy); ctx.lineTo(W,sy); } }
-  ctx.stroke();
+  // Dot grid
+  for(let x=x0;x<=x1;x+=spacing){
+    const isMajX=Math.round(x/spacing)%major===0;
+    for(let y=y0;y<=y1;y+=spacing){
+      const isMajY=Math.round(y/spacing)%major===0;
+      const sp=worldToScreen(x,y);
+      if(isMajX&&isMajY){
+        ctx.fillStyle='rgba(230,245,232,0.75)';
+        ctx.beginPath(); ctx.arc(sp.x,sp.y,1.8,0,Math.PI*2); ctx.fill();
+      } else {
+        ctx.fillStyle='rgba(220,235,222,0.35)';
+        ctx.beginPath(); ctx.arc(sp.x,sp.y,1.0,0,Math.PI*2); ctx.fill();
+      }
+    }
+  }
 
-  ctx.strokeStyle=C.gridMaj; ctx.beginPath();
-  for(let x=x0;x<=x1;x+=spacing){ if(Math.round(x/spacing)%major===0){ const sx=worldToScreen(x,0).x; ctx.moveTo(sx,0); ctx.lineTo(sx,H); } }
-  for(let y=y0;y<=y1;y+=spacing){ if(Math.round(y/spacing)%major===0){ const sy=worldToScreen(0,y).y; ctx.moveTo(0,sy); ctx.lineTo(W,sy); } }
-  ctx.stroke();
-
-  ctx.strokeStyle=C.axis; ctx.lineWidth=1.5; ctx.beginPath();
+  // Axis lines
+  ctx.strokeStyle=C.axis; ctx.lineWidth=0.8;
+  ctx.beginPath();
   const ox=worldToScreen(0,0).x, oy=worldToScreen(0,0).y;
-  ctx.moveTo(ox,0); ctx.lineTo(ox,H); ctx.moveTo(0,oy); ctx.lineTo(W,oy); ctx.stroke();
+  ctx.moveTo(ox,0); ctx.lineTo(ox,H);
+  ctx.moveTo(0,oy); ctx.lineTo(W,oy);
+  ctx.stroke();
 
-  ctx.strokeStyle='#243550'; ctx.lineWidth=1; ctx.beginPath();
-  ctx.moveTo(ox-6,oy); ctx.lineTo(ox+6,oy); ctx.moveTo(ox,oy-6); ctx.lineTo(ox,oy+6); ctx.stroke();
+  // Origin dot
+  ctx.fillStyle='rgba(93,219,140,0.55)';
+  ctx.beginPath(); ctx.arc(ox,oy,2.5,0,Math.PI*2); ctx.fill();
 }
 
 function drawEntities() {
@@ -2963,7 +3128,7 @@ function drawEntities() {
       if(sel){ctx.shadowColor='rgba(255,170,0,0.5)';ctx.shadowBlur=10;}
       ctx.strokeStyle=sel?C.entitySel:C.entity;ctx.lineWidth=sel?2:1.2;
       ctx.beginPath();ctx.arc(sc.x,sc.y,sr,0,Math.PI*2);ctx.stroke();ctx.shadowBlur=0;
-      ctx.lineWidth=0.5;ctx.strokeStyle=sel?C.entitySel:'rgba(0,232,122,0.28)';
+      ctx.lineWidth=0.5;ctx.strokeStyle=sel?C.entitySel:'rgba(61,122,74,0.24)';
       ctx.beginPath();ctx.moveTo(sc.x-6,sc.y);ctx.lineTo(sc.x+6,sc.y);ctx.moveTo(sc.x,sc.y-6);ctx.lineTo(sc.x,sc.y+6);ctx.stroke();
       drawDot(sc.x,sc.y,sel?C.entitySel:C.entity,1.5);
     } else if(o.type==='ARC'){
@@ -3644,8 +3809,7 @@ function stlBBox(triangles) {
 function buildSTL(objects) {
   // Export 2D geometry (lines/polylines) as flat STL for now.
   // Phase 2: solid kernel output goes here.
-  let out = 'solid kube_export
-';
+  let out = 'solid kube_export\n';
   let count = 0;
   for (const o of objects) {
     if (o.type === 'LINE') {
@@ -3668,8 +3832,7 @@ function buildSTL(objects) {
       count++;
     }
   }
-  out += 'endsolid kube_export
-';
+  out += 'endsolid kube_export\n';
   return { text: out, count };
 }
 
@@ -3734,7 +3897,7 @@ function process3DFile(file) {
 
   if (ext === 'stl') {
     statusEl.textContent = 'Parsing STL…';
-    statusEl.style.color = 'var(--accent)';
+    statusEl.style.color = '#5ddb8c';
 
     // Try ASCII first, then binary
     const reader = new FileReader();
@@ -3781,11 +3944,13 @@ function finishSTLParse(name, triangles, statusEl) {
   document.getElementById('i3d-bbox').textContent = `${bbox.w} × ${bbox.h} × ${bbox.d} mm`;
   document.getElementById('import3d-file-info').classList.add('visible');
   statusEl.textContent = `✓ Parsed ${triangles.length.toLocaleString()} triangles`;
-  statusEl.style.color = 'var(--accent)';
+  statusEl.style.color = '#5ddb8c';
   const btn = document.getElementById('i3d-commit-btn');
   btn.disabled = false;
   btn.style.opacity = '1';
   btn.style.cursor = 'pointer';
+  btn.style.background = '#1e3a22';
+  btn.style.color = '#5ddb8c';
 }
 
 function commitImport3D() {
@@ -3834,6 +3999,1104 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+
+// ═══════════════════════════════════════════════════════════
+//  KUBE v1.0 — PHASE 2: WebGPU Renderer
+// ═══════════════════════════════════════════════════════════
+
+// ── RENDERER BACKEND ────────────────────────────────────
+let rendererBackend = 'none'; // 'webgpu' | 'webgl2' | 'canvas2d'
+let gpuDevice = null, gpuContext = null, gpuFormat = null;
+let gl = null; // WebGL2 fallback
+
+// Separate 3D canvas overlaid on the 2D canvas for the 3D view
+let canvas3d = null, ctx3d = null;
+
+// ── 3D CAMERA ───────────────────────────────────────────
+const cam3 = {
+  // Spherical coords around target — default: TOP view
+  theta:   0,              // azimuth (horizontal)
+  phi:     Math.PI / 2 - 0.01, // elevation — near-straight-down
+  radius:  400,            // distance from target (mm)
+  target:  [0, 0, 0],      // orbit center
+  projection: 'perspective', // 'perspective' | 'orthographic'
+  fov:     45,             // degrees
+  near:    0.1,
+  far:     100000,
+  // Derived matrices (updated each frame)
+  viewMat: null,
+  projMat: null,
+  vpMat:   null,           // view * proj combined
+};
+
+// ── MAT4 MATH LIBRARY ───────────────────────────────────
+const Mat4 = {
+  identity() { return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]); },
+
+  multiply(a, b) {
+    const r = new Float32Array(16);
+    for (let i = 0; i < 4; i++)
+      for (let j = 0; j < 4; j++)
+        for (let k = 0; k < 4; k++)
+          r[i*4+j] += a[i*4+k] * b[k*4+j];
+    return r;
+  },
+
+  perspective(fovDeg, aspect, near, far) {
+    const f = 1 / Math.tan(fovDeg * Math.PI / 360);
+    const nf = 1 / (near - far);
+    return new Float32Array([
+      f/aspect, 0,               0,                  0,
+      0,        f,               0,                  0,
+      0,        0,  (far+near)*nf,                 -1,
+      0,        0, 2*far*near*nf,                  0
+    ]);
+  },
+
+  orthographic(w, h, near, far) {
+    const nf = 1/(near - far);
+    return new Float32Array([
+      2/w, 0,        0,      0,
+      0,   2/h,      0,      0,
+      0,   0,    2*nf,      0,
+      0,   0, (near+far)*nf, 1
+    ]);
+  },
+
+  lookAt(eye, target, up) {
+    const z = Vec3.normalize(Vec3.sub(eye, target));
+    const x = Vec3.normalize(Vec3.cross(up, z));
+    const y = Vec3.cross(z, x);
+    return new Float32Array([
+      x[0], y[0], z[0], 0,
+      x[1], y[1], z[1], 0,
+      x[2], y[2], z[2], 0,
+      -Vec3.dot(x,eye), -Vec3.dot(y,eye), -Vec3.dot(z,eye), 1
+    ]);
+  },
+
+  transformPoint(m, p) {
+    const w = m[3]*p[0]+m[7]*p[1]+m[11]*p[2]+m[15];
+    return [
+      (m[0]*p[0]+m[4]*p[1]+m[8]*p[2]+m[12])/w,
+      (m[1]*p[0]+m[5]*p[1]+m[9]*p[2]+m[13])/w,
+      (m[2]*p[0]+m[6]*p[1]+m[10]*p[2]+m[14])/w,
+    ];
+  },
+
+  transformVec(m, v) {
+    return [
+      m[0]*v[0]+m[4]*v[1]+m[8]*v[2],
+      m[1]*v[0]+m[5]*v[1]+m[9]*v[2],
+      m[2]*v[0]+m[6]*v[1]+m[10]*v[2],
+    ];
+  }
+};
+
+const Vec3 = {
+  add:       (a,b)  => [a[0]+b[0], a[1]+b[1], a[2]+b[2]],
+  sub:       (a,b)  => [a[0]-b[0], a[1]-b[1], a[2]-b[2]],
+  scale:     (a,s)  => [a[0]*s,    a[1]*s,    a[2]*s],
+  dot:       (a,b)  => a[0]*b[0]+a[1]*b[1]+a[2]*b[2],
+  length:    (a)    => Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]),
+  normalize: (a)    => { const l=Vec3.length(a)||1; return [a[0]/l,a[1]/l,a[2]/l]; },
+  cross:     (a,b)  => [
+    a[1]*b[2]-a[2]*b[1],
+    a[2]*b[0]-a[0]*b[2],
+    a[0]*b[1]-a[1]*b[0]
+  ],
+};
+
+// ── CAMERA HELPERS ──────────────────────────────────────
+function cam3EyePos() {
+  const sinPhi = Math.sin(cam3.phi), cosPhi = Math.cos(cam3.phi);
+  const sinTh  = Math.sin(cam3.theta), cosTh = Math.cos(cam3.theta);
+  return [
+    cam3.target[0] + cam3.radius * cosPhi * sinTh,
+    cam3.target[1] + cam3.radius * sinPhi,
+    cam3.target[2] + cam3.radius * cosPhi * cosTh,
+  ];
+}
+
+function updateCam3Matrices() {
+  const eye  = cam3EyePos();
+  const up   = [0, 1, 0];
+  cam3.viewMat = Mat4.lookAt(eye, cam3.target, up);
+
+  const w = canvas3d ? canvas3d.width  : 800;
+  const h = canvas3d ? canvas3d.height : 600;
+  const aspect = w / (h || 1);
+
+  if (cam3.projection === 'perspective') {
+    cam3.projMat = Mat4.perspective(cam3.fov, aspect, cam3.near, cam3.far);
+  } else {
+    const s = cam3.radius * Math.tan(cam3.fov * Math.PI / 360);
+    cam3.projMat = Mat4.orthographic(s * aspect * 2, s * 2, -cam3.far, cam3.far);
+  }
+  cam3.vpMat = Mat4.multiply(cam3.projMat, cam3.viewMat);
+}
+
+function worldToNDC(wx, wy, wz) {
+  return Mat4.transformPoint(cam3.vpMat, [wx, wy, wz]);
+}
+
+function ndcToScreen(ndc, w, h) {
+  return [
+    ( ndc[0] + 1) * 0.5 * w,
+    (-ndc[1] + 1) * 0.5 * h,
+  ];
+}
+
+function worldToScreen3D(wx, wy, wz) {
+  if (!canvas3d || !cam3.vpMat) return [0,0];
+  const ndc = worldToNDC(wx, wy, wz);
+  return ndcToScreen(ndc, canvas3d.width, canvas3d.height);
+}
+
+// ── 3D MESH STORE ───────────────────────────────────────
+const MeshStore = {
+  meshes: [], // [{id, name, triangles, color, visible, bbox}]
+  nextId: 1,
+
+  add(name, triangles, color='#3d7a4a') {
+    const bbox = stlBBox(triangles);
+    const mesh = { id: this.nextId++, name, triangles, color, visible: true, bbox };
+    this.meshes.push(mesh);
+    return mesh;
+  },
+
+  remove(id) { this.meshes = this.meshes.filter(m => m.id !== id); },
+  clear()    { this.meshes = []; this.nextId = 1; },
+
+  allBBox() {
+    if (!this.meshes.length) return null;
+    let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity,minZ=Infinity,maxZ=-Infinity;
+    for (const m of this.meshes) {
+      minX=Math.min(minX,m.bbox.minX); maxX=Math.max(maxX,m.bbox.maxX);
+      minY=Math.min(minY,m.bbox.minY); maxY=Math.max(maxY,m.bbox.maxY);
+      minZ=Math.min(minZ,m.bbox.minZ); maxZ=Math.max(maxZ,m.bbox.maxZ);
+    }
+    return {minX,maxX,minY,maxY,minZ,maxZ};
+  }
+};
+
+// ── RENDERER INITIALISATION ─────────────────────────────
+async function initRenderer() {
+  // Create dedicated 3D canvas layered over the 2D canvas
+  canvas3d = document.createElement('canvas');
+  canvas3d.id = 'canvas-3d';
+  canvas3d.style.cssText = `
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; display:none;
+  `;
+  document.getElementById('canvas-wrap').appendChild(canvas3d);
+
+  resize3DCanvas();
+  window.addEventListener('resize', resize3DCanvas);
+
+  // Attempt WebGPU
+  if (navigator.gpu) {
+    try {
+      const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
+      if (adapter) {
+        gpuDevice  = await adapter.requestDevice();
+        gpuContext = canvas3d.getContext('webgpu');
+        gpuFormat  = navigator.gpu.getPreferredCanvasFormat();
+        gpuContext.configure({ device: gpuDevice, format: gpuFormat, alphaMode: 'premultiplied' });
+        rendererBackend = 'webgpu';
+        await initWebGPUPipelines();
+        setGPUStatus('ok', 'WebGPU');
+        return;
+      }
+    } catch(e) { console.warn('WebGPU init failed:', e); }
+  }
+
+  // WebGL2 fallback
+  const glCtx = canvas3d.getContext('webgl2', { antialias: true, alpha: true });
+  if (glCtx) {
+    gl = glCtx;
+    rendererBackend = 'webgl2';
+    initWebGL2Pipelines();
+    setGPUStatus('fb', 'WebGL2');
+    return;
+  }
+
+  // Canvas2D software fallback (always works)
+  ctx3d = canvas3d.getContext('2d');
+  rendererBackend = 'canvas2d';
+  setGPUStatus('err', 'SW Fallback');
+}
+
+function resize3DCanvas() {
+  if (!canvas3d) return;
+  const wrap = document.getElementById('canvas-wrap');
+  canvas3d.width  = wrap.clientWidth;
+  canvas3d.height = wrap.clientHeight;
+  render3D();
+}
+
+function setGPUStatus(state, label) {
+  const el = document.getElementById('webgpu-status');
+  el.className = `gpu-${state}`;
+  document.getElementById('gpu-label').textContent = label;
+  // Update statusbar
+  const sb = document.getElementById('sb-viewmode');
+  if (sb) {
+    const suffix = { webgpu: ' ·GPU', webgl2: ' ·GL2', canvas2d: ' ·SW' }[rendererBackend] || '';
+    // leave sb text managed by toggleViewMode
+  }
+}
+
+// ── WEBGPU PIPELINES ────────────────────────────────────
+let gpuSolidPipeline = null, gpuMeshPipeline = null;
+let gpuUniformBuf = null;
+let gpuVertBuf = null, gpuVertCount = 0;
+let gpuEdgeBuf = null, gpuEdgeCount = 0;
+let gpuBindGroup = null, gpuBindGroupLayout = null;
+
+async function initWebGPUPipelines() {
+  // ── Solid (filled face) shader ──────────────────────────
+  const solidShaderSrc = `
+struct Uniforms {
+  vpMat    : mat4x4<f32>,
+  modelMat : mat4x4<f32>,
+  lightDir : vec4<f32>,
+  color    : vec4<f32>,
+  mode     : f32,   // 0=solid 1=mesh
+  _pad     : vec3<f32>,
+};
+@group(0) @binding(0) var<uniform> u : Uniforms;
+
+struct VIn  { @location(0) pos : vec3<f32>, @location(1) norm : vec3<f32> };
+struct VOut { @builtin(position) clip : vec4<f32>, @location(0) norm : vec3<f32>, @location(1) wpos : vec3<f32> };
+
+@vertex fn vs(v: VIn) -> VOut {
+  var o : VOut;
+  let wp = u.modelMat * vec4<f32>(v.pos, 1.0);
+  o.clip = u.vpMat * wp;
+  o.norm = normalize((u.modelMat * vec4<f32>(v.norm, 0.0)).xyz);
+  o.wpos = wp.xyz;
+  return o;
+}
+
+@fragment fn fs(v: VOut) -> @location(0) vec4<f32> {
+  let N = normalize(v.norm);
+  let L = normalize(u.lightDir.xyz);
+  let diff   = max(dot(N, L), 0.0);
+  let diff2  = max(dot(N, -L), 0.0) * 0.25;  // fill light from back
+  let amb    = 0.22;
+  let bright = amb + diff * 0.65 + diff2;
+  let col    = u.color.rgb * bright;
+  let alpha  = select(0.72, 0.15, u.mode > 0.5); // solid vs mesh face alpha
+  return vec4<f32>(col, alpha);
+}`;
+
+  // ── Edge (wireframe line) shader ───────────────────────
+  const edgeShaderSrc = `
+struct Uniforms {
+  vpMat    : mat4x4<f32>,
+  modelMat : mat4x4<f32>,
+  lightDir : vec4<f32>,
+  color    : vec4<f32>,
+  mode     : f32,
+  _pad     : vec3<f32>,
+};
+@group(0) @binding(0) var<uniform> u : Uniforms;
+
+struct VIn  { @location(0) pos : vec3<f32> };
+struct VOut { @builtin(position) clip : vec4<f32> };
+
+@vertex fn vs(v: VIn) -> VOut {
+  var o : VOut;
+  // Small Z offset to prevent z-fighting with solid faces
+  let wp = u.modelMat * vec4<f32>(v.pos, 1.0);
+  var clip = u.vpMat * wp;
+  clip.z -= 0.0005 * clip.w;
+  o.clip = clip;
+  return o;
+}
+
+@fragment fn fs(v: VOut) -> @location(0) vec4<f32> {
+  // Mesh mode: bright green edges. Solid mode: subtle dark edges
+  let ecol = select(vec3<f32>(0.12, 0.28, 0.16), u.color.rgb, u.mode > 0.5);
+  let ealph = select(0.5, 1.0, u.mode > 0.5);
+  return vec4<f32>(ecol, ealph);
+}`;
+
+  const solidShaderModule = gpuDevice.createShaderModule({ code: solidShaderSrc });
+  const edgeShaderModule  = gpuDevice.createShaderModule({ code: edgeShaderSrc });
+
+  // Uniform buffer: 4*16 (vpMat) + 4*16 (modelMat) + 4*4 (lightDir) + 4*4 (color) + 4 (mode) + 12 (pad) = 160 bytes
+  const UBO_SIZE = 160;
+  gpuUniformBuf = gpuDevice.createBuffer({
+    size:  UBO_SIZE,
+    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+  });
+
+  gpuBindGroupLayout = gpuDevice.createBindGroupLayout({
+    entries: [{ binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT,
+                buffer: { type: 'uniform' } }]
+  });
+
+  gpuBindGroup = gpuDevice.createBindGroup({
+    layout: gpuBindGroupLayout,
+    entries: [{ binding: 0, resource: { buffer: gpuUniformBuf } }]
+  });
+
+  const pipelineLayout = gpuDevice.createPipelineLayout({ bindGroupLayouts: [gpuBindGroupLayout] });
+
+  const vertLayout = {
+    arrayStride: 24, // 3 pos + 3 norm = 6 * float32
+    attributes: [
+      { shaderLocation: 0, offset: 0,  format: 'float32x3' }, // pos
+      { shaderLocation: 1, offset: 12, format: 'float32x3' }, // norm
+    ]
+  };
+
+  const edgeVertLayout = {
+    arrayStride: 12, // 3 pos only
+    attributes: [{ shaderLocation: 0, offset: 0, format: 'float32x3' }]
+  };
+
+  // Depth-stencil state
+  const depthState = {
+    format: 'depth24plus',
+    depthWriteEnabled: true,
+    depthCompare: 'less',
+  };
+
+  // Solid pipeline (triangles, alpha blend for mesh-mode transparency)
+  gpuSolidPipeline = gpuDevice.createRenderPipeline({
+    layout: pipelineLayout,
+    vertex:   { module: solidShaderModule, entryPoint: 'vs', buffers: [vertLayout] },
+    fragment: { module: solidShaderModule, entryPoint: 'fs',
+                targets: [{ format: gpuFormat,
+                  blend: { color:{srcFactor:'src-alpha', dstFactor:'one-minus-src-alpha', operation:'add'},
+                           alpha:{srcFactor:'one', dstFactor:'zero', operation:'add'} } }]},
+    primitive: { topology: 'triangle-list', cullMode: 'none' },
+    depthStencil: depthState,
+  });
+
+  // Edge pipeline (lines)
+  gpuMeshPipeline = gpuDevice.createRenderPipeline({
+    layout: pipelineLayout,
+    vertex:   { module: edgeShaderModule, entryPoint: 'vs', buffers: [edgeVertLayout] },
+    fragment: { module: edgeShaderModule, entryPoint: 'fs',
+                targets: [{ format: gpuFormat,
+                  blend: { color:{srcFactor:'src-alpha', dstFactor:'one-minus-src-alpha', operation:'add'},
+                           alpha:{srcFactor:'one', dstFactor:'zero', operation:'add'} } }]},
+    primitive: { topology: 'line-list' },
+    depthStencil: depthState,
+  });
+
+  // Depth texture
+  rebuildDepthTexture();
+}
+
+let gpuDepthTex = null;
+function rebuildDepthTexture() {
+  if (!gpuDevice || !canvas3d) return;
+  if (gpuDepthTex) gpuDepthTex.destroy();
+  gpuDepthTex = gpuDevice.createTexture({
+    size: [canvas3d.width, canvas3d.height],
+    format: 'depth24plus',
+    usage: GPUTextureUsage.RENDER_ATTACHMENT,
+  });
+}
+
+// ── WEBGL2 FALLBACK PIPELINES ───────────────────────────
+let glProgSolid = null, glProgEdge = null;
+
+function initWebGL2Pipelines() {
+  if (!gl) return;
+  gl.enable(gl.DEPTH_TEST);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  gl.clearColor(0.027, 0.063, 0.039, 0); // transparent, 3D over 2D canvas
+
+  const solidVS = `#version 300 es
+precision highp float;
+uniform mat4 uVP, uModel;
+uniform vec3 uLightDir;
+in vec3 aPos, aNorm;
+out vec3 vNorm, vWPos;
+void main() {
+  vec4 wp = uModel * vec4(aPos, 1.0);
+  gl_Position = uVP * wp;
+  vNorm = normalize(mat3(uModel) * aNorm);
+  vWPos = wp.xyz;
+}`;
+
+  const solidFS = `#version 300 es
+precision highp float;
+uniform vec4 uColor;
+uniform float uMode;
+uniform vec3 uLightDir;
+in vec3 vNorm, vWPos;
+out vec4 fragColor;
+void main() {
+  vec3 N = normalize(vNorm);
+  vec3 L = normalize(uLightDir);
+  float diff  = max(dot(N,L), 0.0);
+  float diff2 = max(dot(N,-L),0.0) * 0.25;
+  float amb   = 0.22;
+  float bright = amb + diff*0.65 + diff2;
+  vec3 col = uColor.rgb * bright;
+  float alpha = uMode > 0.5 ? 0.12 : 0.75;
+  fragColor = vec4(col, alpha);
+}`;
+
+  const edgeVS = `#version 300 es
+precision highp float;
+uniform mat4 uVP, uModel;
+in vec3 aPos;
+void main() {
+  vec4 wp = uModel * vec4(aPos, 1.0);
+  vec4 clip = uVP * wp;
+  clip.z -= 0.001 * clip.w;
+  gl_Position = clip;
+}`;
+
+  const edgeFS = `#version 300 es
+precision highp float;
+uniform vec4 uColor;
+uniform float uMode;
+out vec4 fragColor;
+void main() {
+  vec3 ecol = uMode > 0.5 ? uColor.rgb : vec3(0.12, 0.28, 0.16);
+  float ealph = uMode > 0.5 ? 1.0 : 0.45;
+  fragColor = vec4(ecol, ealph);
+}`;
+
+  glProgSolid = glBuildProg(solidVS, solidFS);
+  glProgEdge  = glBuildProg(edgeVS,  edgeFS);
+}
+
+function glBuildProg(vsrc, fsrc) {
+  const vs = gl.createShader(gl.VERTEX_SHADER);
+  gl.shaderSource(vs, vsrc); gl.compileShader(vs);
+  const fs = gl.createShader(gl.FRAGMENT_SHADER);
+  gl.shaderSource(fs, fsrc); gl.compileShader(fs);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  return prog;
+}
+
+// ── MESH GEOMETRY BUFFERS ───────────────────────────────
+// Build interleaved [px,py,pz, nx,ny,nz] for solid pass
+// and [px,py,pz] pairs for edge pass
+function buildMeshBuffers(triangles) {
+  const solidData = [];
+  const edgeData  = [];
+  for (const tri of triangles) {
+    const v = tri.verts;
+    const n = tri.normal || computeNormal(v[0], v[1], v[2]);
+    for (const vert of v) {
+      solidData.push(vert.x, vert.y, vert.z, n.x, n.y, n.z);
+    }
+    // 3 edges per triangle
+    const pairs = [[v[0],v[1]],[v[1],v[2]],[v[2],v[0]]];
+    for (const [a,b] of pairs) {
+      edgeData.push(a.x, a.y, a.z, b.x, b.y, b.z);
+    }
+  }
+  return {
+    solidF32: new Float32Array(solidData),
+    edgeF32:  new Float32Array(edgeData),
+    triCount: triangles.length,
+    edgePairs: edgeData.length / 6,
+  };
+}
+
+function computeNormal(a, b, c) {
+  const ab = Vec3.sub([b.x,b.y,b.z],[a.x,a.y,a.z]);
+  const ac = Vec3.sub([c.x,c.y,c.z],[a.x,a.y,a.z]);
+  return Vec3.normalize(Vec3.cross(ab, ac));
+  // Returns [x,y,z] but we need {x,y,z}:
+}
+
+function computeNormalObj(a, b, c) {
+  const n = Vec3.normalize(Vec3.cross(
+    Vec3.sub([b.x,b.y,b.z],[a.x,a.y,a.z]),
+    Vec3.sub([c.x,c.y,c.z],[a.x,a.y,a.z])
+  ));
+  return {x:n[0], y:n[1], z:n[2]};
+}
+
+// Upload buffers to GPU
+let gpuMeshBuffers = null; // {vert, edge, triCount, edgePairs}
+let glMeshBuffers  = null;
+
+function uploadMeshToGPU(triangles) {
+  const {solidF32, edgeF32, triCount, edgePairs} = buildMeshBuffers(triangles);
+
+  if (rendererBackend === 'webgpu' && gpuDevice) {
+    if (gpuMeshBuffers) {
+      gpuMeshBuffers.vert.destroy();
+      gpuMeshBuffers.edge.destroy();
+    }
+    const vertBuf = gpuDevice.createBuffer({
+      size: solidF32.byteLength, usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+    });
+    const edgeBuf = gpuDevice.createBuffer({
+      size: edgeF32.byteLength,  usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+    });
+    gpuDevice.queue.writeBuffer(vertBuf, 0, solidF32);
+    gpuDevice.queue.writeBuffer(edgeBuf, 0, edgeF32);
+    gpuMeshBuffers = { vert: vertBuf, edge: edgeBuf, triCount, edgePairs };
+
+  } else if (rendererBackend === 'webgl2' && gl) {
+    if (!glMeshBuffers) {
+      glMeshBuffers = { vert: gl.createBuffer(), edge: gl.createBuffer() };
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, glMeshBuffers.vert);
+    gl.bufferData(gl.ARRAY_BUFFER, solidF32, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, glMeshBuffers.edge);
+    gl.bufferData(gl.ARRAY_BUFFER, edgeF32,  gl.STATIC_DRAW);
+    glMeshBuffers.triCount  = triCount;
+    glMeshBuffers.edgePairs = edgePairs;
+  }
+}
+
+// ── WORKPLANE GRID GEOMETRY ─────────────────────────────
+function buildGridGeometry(size=1000, step=50) {
+  const verts = [];
+  for (let i = -size; i <= size; i += step) {
+    // Lines parallel to X axis
+    verts.push(-size, 0, i,   size, 0, i);
+    // Lines parallel to Z axis
+    verts.push(i, 0, -size,   i, 0,  size);
+  }
+  // Axis markers (X=red-ish, Z=blue-ish — using brighter for contrast)
+  // These mix into the grid as longer lines; coloring done in shader via Y=0 detection
+  return new Float32Array(verts);
+}
+
+let gpuGridBuf = null, gpuGridCount = 0;
+let glGridBuf = null;
+
+function uploadGridToGPU() {
+  const data = buildGridGeometry();
+  gpuGridCount = data.length / 3;
+
+  if (rendererBackend === 'webgpu' && gpuDevice) {
+    if (gpuGridBuf) gpuGridBuf.destroy();
+    gpuGridBuf = gpuDevice.createBuffer({
+      size: data.byteLength, usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+    });
+    gpuDevice.queue.writeBuffer(gpuGridBuf, 0, data);
+  } else if (rendererBackend === 'webgl2' && gl) {
+    if (!glGridBuf) glGridBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, glGridBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+  }
+}
+
+// ── UNIFORM UPDATE ──────────────────────────────────────
+function hexToRGB(hex) {
+  const r = parseInt(hex.slice(1,3),16)/255;
+  const g = parseInt(hex.slice(3,5),16)/255;
+  const b = parseInt(hex.slice(5,7),16)/255;
+  return [r,g,b];
+}
+
+function writeUniforms(color=[0,0.91,0.478], mode=0) {
+  updateCam3Matrices();
+  const identity = Mat4.identity();
+  const lightDir = Vec3.normalize([1.2, 2.0, 1.5]);
+
+  // Pack: vpMat(64) + modelMat(64) + lightDir+pad(16) + color+pad(16) = 160
+  const buf = new Float32Array(40);
+  buf.set(cam3.vpMat,  0);      // vpMat   at offset 0   (16 floats)
+  buf.set(identity,   16);      // modelMat at offset 16  (16 floats)
+  buf[32] = lightDir[0];
+  buf[33] = lightDir[1];
+  buf[34] = lightDir[2];
+  buf[35] = 0;
+  buf[36] = color[0];
+  buf[37] = color[1];
+  buf[38] = color[2];
+  buf[39] = mode;               // mode at offset 39
+
+  if (rendererBackend === 'webgpu' && gpuDevice) {
+    gpuDevice.queue.writeBuffer(gpuUniformBuf, 0, buf);
+  }
+  return buf;
+}
+
+// ── MAIN 3D RENDER ──────────────────────────────────────
+function render3D() {
+  if (!canvas3d || !is3DMode()) { if(canvas3d) canvas3d.style.display='none'; return; }
+
+  updateCam3Matrices();
+  const w = canvas3d.width, h = canvas3d.height;
+  const modeVal = viewMode === 'mesh' ? 1.0 : 0.0;
+  const accentRGB = hexToRGB('#3d7a4a');
+
+  if (rendererBackend === 'webgpu') {
+    renderWebGPU(w, h, modeVal, accentRGB);
+  } else if (rendererBackend === 'webgl2') {
+    renderWebGL2(w, h, modeVal, accentRGB);
+  } else {
+    renderCanvas2DSoftware(w, h, modeVal);
+  }
+
+  drawAxisGizmo();
+}
+
+// ── WEBGPU RENDER PASS ──────────────────────────────────
+function renderWebGPU(w, h, modeVal, accentRGB) {
+  if (!gpuDevice || !gpuContext || !gpuSolidPipeline) return;
+
+  // Rebuild depth texture if canvas resized
+  if (!gpuDepthTex || gpuDepthTex.width !== w || gpuDepthTex.height !== h) {
+    rebuildDepthTexture();
+  }
+
+  const unifBuf = writeUniforms(accentRGB, modeVal);
+
+  const encoder = gpuDevice.createCommandEncoder();
+  const colorAttach = gpuContext.getCurrentTexture().createView();
+  const depthAttach = gpuDepthTex.createView();
+
+  const pass = encoder.beginRenderPass({
+    colorAttachments: [{
+      view: colorAttach,
+      clearValue: { r: 0, g: 0, b: 0, a: 0 },
+      loadOp:  'clear',
+      storeOp: 'store',
+    }],
+    depthStencilAttachment: {
+      view: depthAttach,
+      depthClearValue: 1.0,
+      depthLoadOp:  'clear',
+      depthStoreOp: 'store',
+    }
+  });
+
+  // ── Solid pass (faces) ──
+  if (gpuMeshBuffers && gpuMeshBuffers.triCount > 0) {
+    pass.setPipeline(gpuSolidPipeline);
+    pass.setBindGroup(0, gpuBindGroup);
+    pass.setVertexBuffer(0, gpuMeshBuffers.vert);
+    pass.draw(gpuMeshBuffers.triCount * 3);
+
+    // ── Edge pass (wireframe) ──
+    pass.setPipeline(gpuMeshPipeline);
+    pass.setBindGroup(0, gpuBindGroup);
+    pass.setVertexBuffer(0, gpuMeshBuffers.edge);
+    pass.draw(gpuMeshBuffers.edgePairs * 2);
+  }
+
+  // Grid pass (edges only, using edge pipeline with grid color)
+  if (gpuGridBuf) {
+    writeUniforms([0.07, 0.14, 0.09], modeVal);
+    pass.setPipeline(gpuMeshPipeline);
+    pass.setBindGroup(0, gpuBindGroup);
+    pass.setVertexBuffer(0, gpuGridBuf);
+    pass.draw(gpuGridCount);
+    // Restore uniforms
+    writeUniforms(accentRGB, modeVal);
+  }
+
+  pass.end();
+  gpuDevice.queue.submit([encoder.finish()]);
+}
+
+// ── WEBGL2 RENDER PASS ──────────────────────────────────
+function renderWebGL2(w, h, modeVal, accentRGB) {
+  if (!gl || !glProgSolid) return;
+  gl.viewport(0, 0, w, h);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+  updateCam3Matrices();
+  const ident = Mat4.identity();
+  const light = Vec3.normalize([1.2, 2.0, 1.5]);
+
+  if (!glMeshBuffers || !glMeshBuffers.triCount) return;
+
+  // ── Solid pass ──
+  gl.useProgram(glProgSolid);
+  setGLUniforms(glProgSolid, accentRGB, ident, light, modeVal);
+  const aPos  = gl.getAttribLocation(glProgSolid, 'aPos');
+  const aNorm = gl.getAttribLocation(glProgSolid, 'aNorm');
+  gl.bindBuffer(gl.ARRAY_BUFFER, glMeshBuffers.vert);
+  gl.enableVertexAttribArray(aPos);  gl.vertexAttribPointer(aPos,  3, gl.FLOAT, false, 24, 0);
+  gl.enableVertexAttribArray(aNorm); gl.vertexAttribPointer(aNorm, 3, gl.FLOAT, false, 24, 12);
+  gl.drawArrays(gl.TRIANGLES, 0, glMeshBuffers.triCount * 3);
+
+  // ── Edge pass ──
+  gl.useProgram(glProgEdge);
+  setGLUniforms(glProgEdge, accentRGB, ident, light, modeVal);
+  const aPosE = gl.getAttribLocation(glProgEdge, 'aPos');
+  gl.bindBuffer(gl.ARRAY_BUFFER, glMeshBuffers.edge);
+  gl.enableVertexAttribArray(aPosE);
+  gl.vertexAttribPointer(aPosE, 3, gl.FLOAT, false, 12, 0);
+  gl.drawArrays(gl.LINES, 0, glMeshBuffers.edgePairs * 2);
+}
+
+function setGLUniforms(prog, color, model, light, mode) {
+  const setM4 = (name, mat) => {
+    const loc = gl.getUniformLocation(prog, name);
+    if (loc) gl.uniformMatrix4fv(loc, false, mat);
+  };
+  const setV3 = (name, v) => {
+    const loc = gl.getUniformLocation(prog, name);
+    if (loc) gl.uniform3fv(loc, v);
+  };
+  const setF  = (name, f) => {
+    const loc = gl.getUniformLocation(prog, name);
+    if (loc) gl.uniform1f(loc, f);
+  };
+  setM4('uVP',    cam3.vpMat);
+  setM4('uModel', model);
+  setV3('uLightDir', light);
+  setV3('uColor',  color);
+  setF ('uMode',  mode);
+}
+
+// ── CANVAS2D SOFTWARE FALLBACK ──────────────────────────
+function renderCanvas2DSoftware(w, h, modeVal) {
+  if (!ctx3d) return;
+  ctx3d.clearRect(0, 0, w, h);
+  if (!MeshStore.meshes.length) return;
+
+  updateCam3Matrices();
+
+  for (const mesh of MeshStore.meshes) {
+    if (!mesh.visible) continue;
+    ctx3d.strokeStyle = '#3d7a4a';
+    ctx3d.lineWidth   = 0.5;
+    ctx3d.globalAlpha = modeVal > 0.5 ? 0.9 : 0.4;
+
+    for (const tri of mesh.triangles) {
+      const v = tri.verts;
+      const pts = v.map(p => worldToScreen3D(p.x, p.y, p.z));
+
+      // Backface cull: check if triangle faces camera (canvas2D heuristic)
+      const dx1 = pts[1][0]-pts[0][0], dy1 = pts[1][1]-pts[0][1];
+      const dx2 = pts[2][0]-pts[0][0], dy2 = pts[2][1]-pts[0][1];
+      const cross = dx1*dy2 - dy1*dx2;
+
+      if (modeVal < 0.5) {
+        // Solid mode: fill with lighting approximation
+        const lightZ = tri.normal ? tri.normal.z : 0;
+        const bright = 0.2 + Math.abs(lightZ) * 0.7;
+        ctx3d.fillStyle = `rgba(${Math.round(40*bright)},${Math.round(100*bright)},${Math.round(55*bright)},0.78)`;
+        if (cross > 0) {
+          ctx3d.beginPath();
+          ctx3d.moveTo(pts[0][0], pts[0][1]);
+          ctx3d.lineTo(pts[1][0], pts[1][1]);
+          ctx3d.lineTo(pts[2][0], pts[2][1]);
+          ctx3d.closePath();
+          ctx3d.fill();
+        }
+      }
+
+      // Edge overlay always
+      ctx3d.beginPath();
+      ctx3d.moveTo(pts[0][0], pts[0][1]);
+      ctx3d.lineTo(pts[1][0], pts[1][1]);
+      ctx3d.lineTo(pts[2][0], pts[2][1]);
+      ctx3d.closePath();
+      ctx3d.globalAlpha = modeVal > 0.5 ? 0.85 : 0.25;
+      ctx3d.stroke();
+    }
+  }
+  ctx3d.globalAlpha = 1;
+  drawWorkplaneGrid2D();
+}
+
+function drawWorkplaneGrid2D() {
+  if (!ctx3d) return;
+  ctx3d.strokeStyle = 'rgba(18,35,22,0.7)';
+  ctx3d.lineWidth   = 0.5;
+  const step = 50, size = 800;
+  for (let i = -size; i <= size; i += step) {
+    const a = worldToScreen3D(-size, 0, i);
+    const b = worldToScreen3D(size,  0, i);
+    ctx3d.beginPath(); ctx3d.moveTo(a[0],a[1]); ctx3d.lineTo(b[0],b[1]); ctx3d.stroke();
+    const c = worldToScreen3D(i, 0, -size);
+    const d = worldToScreen3D(i, 0,  size);
+    ctx3d.beginPath(); ctx3d.moveTo(c[0],c[1]); ctx3d.lineTo(d[0],d[1]); ctx3d.stroke();
+  }
+  // Axis lines
+  const o = worldToScreen3D(0,0,0);
+  const xEnd = worldToScreen3D(100,0,0);
+  const zEnd = worldToScreen3D(0,0,100);
+  ctx3d.lineWidth = 1.5;
+  ctx3d.strokeStyle = 'rgba(93,219,140,0.75)';
+  ctx3d.beginPath(); ctx3d.moveTo(o[0],o[1]); ctx3d.lineTo(xEnd[0],xEnd[1]); ctx3d.stroke();
+  ctx3d.strokeStyle = 'rgba(50,120,180,0.55)';
+  ctx3d.beginPath(); ctx3d.moveTo(o[0],o[1]); ctx3d.lineTo(zEnd[0],zEnd[1]); ctx3d.stroke();
+}
+
+// ── AXIS GIZMO ──────────────────────────────────────────
+function drawAxisGizmo() {
+  const gc = document.getElementById('axis-gizmo');
+  if (!gc) return;
+  const g  = gc.getContext('2d');
+  const sz = 72, cx = sz/2, cy = sz/2, len = 26;
+  g.clearRect(0, 0, sz, sz);
+
+  updateCam3Matrices();
+
+  const axes = [
+    { dir:[1,0,0], color:'#ff5566', label:'X' },
+    { dir:[0,1,0], color:'#3d7a4a', label:'Y' },
+    { dir:[0,0,1], color:'#3399ff', label:'Z' },
+  ];
+
+  // Sort back to front
+  const eye = cam3EyePos();
+  axes.sort((a,b) => {
+    const da = Vec3.dot(a.dir, Vec3.normalize(eye));
+    const db = Vec3.dot(b.dir, Vec3.normalize(eye));
+    return da - db;
+  });
+
+  for (const ax of axes) {
+    const ndc = worldToNDC(...ax.dir);
+    const dx = ndc[0] * len, dy = -ndc[1] * len;
+    g.strokeStyle = ax.color; g.fillStyle = ax.color;
+    g.lineWidth = 2;
+    g.globalAlpha = 0.9;
+    g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx+dx, cy+dy); g.stroke();
+    g.beginPath(); g.arc(cx+dx, cy+dy, 3.5, 0, Math.PI*2); g.fill();
+    g.font = '9px Fira Code, monospace';
+    g.fillText(ax.label, cx+dx+5, cy+dy+4);
+  }
+  g.globalAlpha = 1;
+}
+
+// ── ORBIT MOUSE CONTROLS ────────────────────────────────
+let orbitState = { dragging: false, panning: false, lastX: 0, lastY: 0 };
+
+function init3DOrbitControls() {
+  const cw = document.getElementById('canvas-wrap');
+
+  cw.addEventListener('mousedown', (e) => {
+    if (!is3DMode()) return;
+    if (e.button === 0) { // Left — orbit
+      orbitState.dragging = true;
+      orbitState.lastX = e.clientX; orbitState.lastY = e.clientY;
+      e.preventDefault();
+    } else if (e.button === 1) { // Middle — pan
+      orbitState.panning = true;
+      orbitState.lastX = e.clientX; orbitState.lastY = e.clientY;
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!is3DMode()) return;
+    const dx = e.clientX - orbitState.lastX;
+    const dy = e.clientY - orbitState.lastY;
+    orbitState.lastX = e.clientX; orbitState.lastY = e.clientY;
+
+    if (orbitState.dragging) {
+      cam3.theta -= dx * 0.008;
+      cam3.phi   += dy * 0.008;
+      cam3.phi    = Math.max(-Math.PI/2 + 0.01, Math.min(Math.PI/2 - 0.01, cam3.phi));
+      render3D();
+    } else if (orbitState.panning) {
+      // Pan in camera-space XY
+      const eye = cam3EyePos();
+      const forward = Vec3.normalize(Vec3.sub(cam3.target, eye));
+      const right   = Vec3.normalize(Vec3.cross(forward, [0,1,0]));
+      const up      = Vec3.cross(right, forward);
+      const s = cam3.radius * 0.001;
+      cam3.target = Vec3.add(cam3.target, Vec3.scale(right, -dx * s));
+      cam3.target = Vec3.add(cam3.target, Vec3.scale(up,    dy * s));
+      render3D();
+    }
+  });
+
+  window.addEventListener('mouseup', () => {
+    orbitState.dragging = false; orbitState.panning = false;
+  });
+
+  // Scroll — zoom
+  cw.addEventListener('wheel', (e) => {
+    if (!is3DMode()) return;
+    e.preventDefault();
+    cam3.radius *= e.deltaY > 0 ? 1.1 : 0.91;
+    cam3.radius  = Math.max(5, Math.min(50000, cam3.radius));
+    render3D();
+  }, { passive: false });
+
+  // Touch orbit (single finger)
+  let lastTouch = null;
+  cw.addEventListener('touchstart', (e) => {
+    if (!is3DMode() || e.touches.length !== 1) return;
+    lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  });
+  cw.addEventListener('touchmove', (e) => {
+    if (!is3DMode() || e.touches.length !== 1 || !lastTouch) return;
+    e.preventDefault();
+    const dx = e.touches[0].clientX - lastTouch.x;
+    const dy = e.touches[0].clientY - lastTouch.y;
+    lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    cam3.theta -= dx * 0.01;
+    cam3.phi   += dy * 0.01;
+    cam3.phi    = Math.max(-Math.PI/2+0.01, Math.min(Math.PI/2-0.01, cam3.phi));
+    render3D();
+  }, { passive: false });
+}
+
+// ── VIEW PRESETS ────────────────────────────────────────
+const VIEW_PRESETS = {
+  iso:   { theta: Math.PI/4,     phi: Math.PI/5.5 },
+  top:   { theta: 0,             phi: Math.PI/2 - 0.01 },
+  front: { theta: 0,             phi: 0 },
+  right: { theta: Math.PI/2,     phi: 0 },
+  back:  { theta: Math.PI,       phi: 0 },
+};
+
+function setView3D(name) {
+  const preset = VIEW_PRESETS[name];
+  if (!preset) return;
+  // Animate smoothly
+  const startTheta = cam3.theta, startPhi = cam3.phi;
+  const endTheta = preset.theta, endPhi = preset.phi;
+  const dur = 320, start = performance.now();
+  function tick(now) {
+    const t = Math.min((now - start) / dur, 1);
+    const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+    cam3.theta = startTheta + (endTheta - startTheta) * ease;
+    cam3.phi   = startPhi   + (endPhi   - startPhi)   * ease;
+    render3D();
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  // Update active button
+  ['iso','top','front','right'].forEach(id => {
+    const btn = document.getElementById('vp-'+id);
+    if (btn) btn.classList.toggle('active', id === name);
+  });
+}
+
+function toggleProjection() {
+  cam3.projection = cam3.projection === 'perspective' ? 'orthographic' : 'perspective';
+  const btn = document.getElementById('vp-persp');
+  if (btn) {
+    btn.textContent = cam3.projection === 'perspective' ? 'PERSP' : 'ORTHO';
+    btn.classList.toggle('active', cam3.projection === 'orthographic');
+  }
+  showToast('Projection: ' + (cam3.projection === 'perspective' ? 'Perspective' : 'Orthographic'));
+  render3D();
+}
+
+// ── 3D / 2D MODE SWITCHING ──────────────────────────────
+function is3DMode() { return MeshStore.meshes.length > 0; }
+
+// Override commitImport3D to use 3D mesh pipeline
+const _orig_commitImport3D = commitImport3D;
+window.commitImport3D = function() {
+  if (!_import3dParsed || !_import3dParsed.length) return;
+  const triangles = _import3dParsed;
+  // Fix missing normals
+  for (const tri of triangles) {
+    if (!tri.normal || (tri.normal.x === 0 && tri.normal.y === 0 && tri.normal.z === 0)) {
+      const n = computeNormalObj(tri.verts[0], tri.verts[1], tri.verts[2]);
+      tri.normal = n;
+    }
+  }
+
+  const mesh = MeshStore.add('STL Import', triangles);
+  const bbox = mesh.bbox;
+
+  // Center the camera on the mesh
+  cam3.target = [
+    (bbox.minX + bbox.maxX) / 2,
+    (bbox.minY + bbox.maxY) / 2,
+    (bbox.minZ + bbox.maxZ) / 2,
+  ];
+  const maxDim = Math.max(bbox.maxX-bbox.minX, bbox.maxY-bbox.minY, bbox.maxZ-bbox.minZ);
+  cam3.radius  = maxDim * 2.2;
+
+  uploadMeshToGPU(triangles);
+  uploadGridToGPU();
+
+  // Show 3D canvas, hide 2D orbit interference
+  canvas3d.style.display  = 'block';
+  canvas3d.style.pointerEvents = 'none';
+  document.getElementById('main-canvas').style.opacity = '0.08';
+  document.getElementById('orbit-hint').classList.add('visible');
+
+  // Populate mesh info panel
+  document.getElementById('mesh-info').classList.add('visible');
+  document.getElementById('mi-tris').textContent  = triangles.length.toLocaleString();
+  document.getElementById('mi-verts').textContent = (triangles.length*3).toLocaleString();
+  document.getElementById('mi-w').textContent = parseFloat(bbox.w).toFixed(2) + ' mm';
+  document.getElementById('mi-h').textContent = parseFloat(bbox.h).toFixed(2) + ' mm';
+  document.getElementById('mi-d').textContent = parseFloat(bbox.d).toFixed(2) + ' mm';
+
+  closeImport3D();
+  render3D();
+  showToast(`Mesh loaded · ${triangles.length.toLocaleString()} triangles · ${rendererBackend.toUpperCase()}`);
+  _import3dParsed = null;
+};
+
+// ── PUSH/PULL TOOL (3D scaffold) ────────────────────────
+let pushPullState = { active: false, faceIdx: -1, baseDepth: 0 };
+
+function activatePushPull() {
+  pushPullState.active = true;
+  showToast('Push/Pull: click a face to extrude · Phase 2 scaffold');
+  document.getElementById('pushpull-input').classList.add('visible');
+  document.getElementById('pushpull-field').focus();
+}
+
+document.getElementById('pushpull-field').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const depth = parseFloat(document.getElementById('pushpull-field').value);
+    if (!isNaN(depth)) {
+      showToast(`Push/Pull: depth ${depth} mm — full extrusion in Phase 3`);
+    }
+    document.getElementById('pushpull-input').classList.remove('visible');
+    pushPullState.active = false;
+    e.preventDefault();
+  }
+  if (e.key === 'Escape') {
+    document.getElementById('pushpull-input').classList.remove('visible');
+    pushPullState.active = false;
+    e.preventDefault();
+  }
+});
+
+// ── KEYBOARD: View preset numpad shortcuts ───────────────
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === '1' && !e.ctrlKey) { setView3D('iso');   }
+  if (e.key === '2')               { setView3D('top');   }
+  if (e.key === '3')               { setView3D('front'); }
+  if (e.key === '4')               { setView3D('right'); }
+  if (e.key === '5')               { toggleProjection(); }
+  if (e.key === 'v' || e.key === 'V') {
+    // Home 3D view
+    if (is3DMode()) { setView3D('iso'); }
+  }
+});
+
+// ── OVERRIDE render() for 3D awareness ──────────────────
+const _orig2Drender = render;
+function render() {
+  _orig2Drender();   // always run 2D canvas update
+  if (is3DMode()) render3D();
+}
+
+// ── PHASE 2 INIT ────────────────────────────────────────
+async function initPhase2() {
+  await initRenderer();
+  init3DOrbitControls();
+  // Size the axis gizmo canvas
+  const gc = document.getElementById('axis-gizmo');
+  if (gc) { gc.width = 72; gc.height = 72; }
+  console.log(`KUBE Phase 2 renderer: ${rendererBackend}`);
+}
+
 // ── INIT ────────────────────────────────────────────────
 requestAnimationFrame(()=>{
   requestAnimationFrame(()=>{
@@ -3843,11 +5106,16 @@ requestAnimationFrame(()=>{
     canvas.focus();
     document.getElementById('cc-year').textContent = new Date().getFullYear();
     initSplash();
+    // Phase 2: boot WebGPU/WebGL2 renderer
+    initPhase2().then(()=>{
+      uploadGridToGPU();
+    });
     setTimeout(()=>{
       GeoMemory.addLine(-15,0,15,0);
       GeoMemory.addLine(0,-15,0,15);
+      document.getElementById('main-canvas').style.opacity = '1';
       render();
-      showToast('KUBE v1.0 · Press L/A/C/R/P/F to draw · Tab toggles Solid/Mesh');
+      showToast('KUBE v1.0 · Import .STL to enter 3D · Tab = Solid/Mesh');
     },100);
   });
 });
