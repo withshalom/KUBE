@@ -3213,16 +3213,9 @@ const C={
 
 function render() {
   const W=canvas.width, H=canvas.height;
-  // In 3D mode the WebGL canvas shows geometry — 2D canvas becomes a transparent overlay
-  // for selection handles, pivot, preview lines, crosshair etc.
-  const in3D = MeshStore.meshes.length > 0 || SolidStore.solids.length > 0;
+  // main-canvas is transparent overlay — 3D canvas owns the background, grid, entities
   ctx.clearRect(0,0,W,H);
-  if (!in3D) {
-    ctx.fillStyle=C.bg; ctx.fillRect(0,0,W,H);
-    if(showGrid) drawGrid(W,H);
-    drawEntities();
-  }
-  // Always draw interactive overlays regardless of mode
+  // Only draw interactive overlays (tool previews, snap, selection)
   drawRubberBand();
   drawOffsetPreview();
   drawPolyPreview();
@@ -4204,6 +4197,7 @@ let gl = null; // WebGL2 fallback
 
 // Separate 3D canvas overlaid on the 2D canvas for the 3D view
 let canvas3d = null, ctx3d = null;
+let canvasSketch = null, ctxSketch = null;
 
 // ── 3D CAMERA ───────────────────────────────────────────
 
@@ -4264,8 +4258,23 @@ async function initRenderer() {
   canvas3d.id = 'canvas-3d';
   canvas3d.style.cssText = `
     position:absolute; top:0; left:0; width:100%; height:100%;
-    pointer-events:none; display:none;
+    pointer-events:none; display:block;
   `;
+
+  // Sketch overlay — always-on, projects GeoMemory into 3D world
+  canvasSketch = document.createElement('canvas');
+  canvasSketch.id = 'canvas-sketch';
+  canvasSketch.style.cssText = `
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    pointer-events:none;
+  `;
+  const _mc = document.getElementById('main-canvas');
+  document.getElementById('canvas-wrap').insertBefore(canvasSketch, _mc);
+  ctxSketch = canvasSketch.getContext('2d');
+  // Size it immediately — resize3DCanvas already ran before we created it
+  const _wrap = document.getElementById('canvas-wrap');
+  canvasSketch.width  = _wrap.clientWidth  || canvas3d.width  || 800;
+  canvasSketch.height = _wrap.clientHeight || canvas3d.height || 600;
   document.getElementById('canvas-wrap').appendChild(canvas3d);
 
   resize3DCanvas();
@@ -4309,6 +4318,7 @@ function resize3DCanvas() {
   const wrap = document.getElementById('canvas-wrap');
   canvas3d.width  = wrap.clientWidth;
   canvas3d.height = wrap.clientHeight;
+  if (canvasSketch) { canvasSketch.width = canvas3d.width; canvasSketch.height = canvas3d.height; }
   render3D();
 }
 
@@ -4680,8 +4690,118 @@ function hexToRGB(hex) {
 
 
 // ── MAIN 3D RENDER ──────────────────────────────────────
+
+// ── ALWAYS-3D SKETCH RENDERER ────────────────────────────────────
+// Projects GeoMemory sketch objects onto the Y=0 world plane in 3D.
+// Runs every frame alongside render3D(). Works with all backends.
+function renderSketch3D() {
+  if (!ctxSketch) return;
+  if (!cam3.vpMat && canvas3d) updateCam3Matrices(); // ensure matrices set
+  if (!cam3.vpMat) return;
+  const w = canvasSketch.width, h = canvasSketch.height;
+  ctxSketch.clearRect(0, 0, w, h);
+
+  // Draw the workplane grid (XZ plane, Y=0) in 3D perspective
+  ctxSketch.save();
+  ctxSketch.strokeStyle = 'rgba(0,120,40,0.18)';
+  ctxSketch.lineWidth   = 0.5;
+  const gSize = 600, gStep = 50;
+  for (let i = -gSize; i <= gSize; i += gStep) {
+    const a = worldToScreen3D(-gSize, 0, i),  b = worldToScreen3D(gSize, 0, i);
+    const c = worldToScreen3D(i, 0, -gSize),  d = worldToScreen3D(i, 0, gSize);
+    ctxSketch.beginPath(); ctxSketch.moveTo(a[0],a[1]); ctxSketch.lineTo(b[0],b[1]); ctxSketch.stroke();
+    ctxSketch.beginPath(); ctxSketch.moveTo(c[0],c[1]); ctxSketch.lineTo(d[0],d[1]); ctxSketch.stroke();
+  }
+  // Major axis lines
+  ctxSketch.strokeStyle = 'rgba(0,200,60,0.40)';
+  ctxSketch.lineWidth = 1.0;
+  [[-gSize,0,0],[gSize,0,0]].forEach((p,i) => {
+    const pt = worldToScreen3D(...p);
+    i===0 ? ctxSketch.beginPath() && ctxSketch.moveTo(pt[0],pt[1]) : ctxSketch.lineTo(pt[0],pt[1]);
+    if (i===1) ctxSketch.stroke();
+  });
+  ctxSketch.beginPath();
+  let ax0=worldToScreen3D(-gSize,0,0), ax1=worldToScreen3D(gSize,0,0);
+  ctxSketch.moveTo(ax0[0],ax0[1]); ctxSketch.lineTo(ax1[0],ax1[1]); ctxSketch.stroke();
+  let az0=worldToScreen3D(0,0,-gSize), az1=worldToScreen3D(0,0,gSize);
+  ctxSketch.beginPath(); ctxSketch.moveTo(az0[0],az0[1]); ctxSketch.lineTo(az1[0],az1[1]); ctxSketch.stroke();
+  ctxSketch.restore();
+
+  if (!GeoMemory || !GeoMemory.objects.length) return;
+
+  // Draw sketch objects projected onto Y=0 plane
+  ctxSketch.save();
+  ctxSketch.strokeStyle = 'rgba(40,220,80,0.90)';
+  ctxSketch.fillStyle   = 'rgba(40,220,80,0.90)';
+  ctxSketch.lineWidth   = 1.4;
+  ctxSketch.lineCap     = 'round';
+  ctxSketch.lineJoin    = 'round';
+
+  for (const obj of GeoMemory.objects) {
+    switch (obj.type) {
+      case 'LINE': {
+        const a = worldToScreen3D(obj.x1, 0, obj.y1);
+        const b = worldToScreen3D(obj.x2, 0, obj.y2);
+        ctxSketch.beginPath();
+        ctxSketch.moveTo(a[0], a[1]);
+        ctxSketch.lineTo(b[0], b[1]);
+        ctxSketch.stroke();
+        break;
+      }
+      case 'ARC': {
+        const N = 48;
+        const startA = obj.startA ?? obj.startAngle ?? 0;
+        const endA   = obj.endA   ?? obj.endAngle   ?? Math.PI*2;
+        const ccw    = obj.ccw !== false;
+        const span   = ccw
+          ? (endA >= startA ? endA-startA : endA-startA+Math.PI*2)
+          : (startA >= endA ? startA-endA : startA-endA+Math.PI*2);
+        ctxSketch.beginPath();
+        for (let i = 0; i <= N; i++) {
+          const ang = ccw ? startA + span*(i/N) : startA - span*(i/N);
+          const p = worldToScreen3D(obj.cx + Math.cos(ang)*obj.r, 0,
+                                    obj.cy + Math.sin(ang)*obj.r);
+          i===0 ? ctxSketch.moveTo(p[0],p[1]) : ctxSketch.lineTo(p[0],p[1]);
+        }
+        ctxSketch.stroke();
+        break;
+      }
+      case 'CIRCLE': {
+        const N = 64;
+        ctxSketch.beginPath();
+        for (let i=0; i<=N; i++) {
+          const a = (i/N)*Math.PI*2;
+          const p = worldToScreen3D(obj.cx+Math.cos(a)*obj.r, 0, obj.cy+Math.sin(a)*obj.r);
+          i===0 ? ctxSketch.moveTo(p[0],p[1]) : ctxSketch.lineTo(p[0],p[1]);
+        }
+        ctxSketch.closePath(); ctxSketch.stroke();
+        break;
+      }
+      case 'POINT': {
+        const p = worldToScreen3D(obj.x, 0, obj.y);
+        ctxSketch.beginPath(); ctxSketch.arc(p[0],p[1],2.5,0,Math.PI*2); ctxSketch.fill();
+        break;
+      }
+      case 'POLYLINE': {
+        const pts = obj.pts || obj.points || [];
+        if (pts.length < 2) break;
+        ctxSketch.beginPath();
+        pts.forEach((pt,i) => {
+          const p = worldToScreen3D(pt.x, 0, pt.y);
+          i===0 ? ctxSketch.moveTo(p[0],p[1]) : ctxSketch.lineTo(p[0],p[1]);
+        });
+        if (obj.closed) ctxSketch.closePath();
+        ctxSketch.stroke();
+        break;
+      }
+    }
+  }
+  ctxSketch.restore();
+}
+
 function render3D() {
-  if (!canvas3d || !is3DMode()) { if(canvas3d) canvas3d.style.display='none'; return; }
+  if (!canvas3d) return;
+  canvas3d.style.display = 'block';
 
   updateCam3Matrices();
   const w = canvas3d.width, h = canvas3d.height;
@@ -4710,9 +4830,47 @@ function renderWebGL2(w, h, modeVal, accentRGB) {
   const ident = Mat4.identity();
   const light = Vec3.normalize([1.2, 2.0, 1.5]);
 
+  // ── Grid pass (always visible in 3D mode) ────────────────────
+  if (glGridBuf && gpuGridCount > 0 && glProgEdge) {
+    gl.useProgram(glProgEdge);
+    setGLUniforms(glProgEdge, [0.07, 0.10, 0.14], ident, light, modeVal);
+    const aPosG = gl.getAttribLocation(glProgEdge, 'aPos');
+    gl.bindBuffer(gl.ARRAY_BUFFER, glGridBuf);
+    gl.enableVertexAttribArray(aPosG);
+    gl.vertexAttribPointer(aPosG, 3, gl.FLOAT, false, 12, 0);
+    gl.drawArrays(gl.LINES, 0, gpuGridCount);
+    gl.disableVertexAttribArray(aPosG);
+  }
+
+  // ── SolidStore pass (push-pull extrusions) ───────────────────
+  for (const solid of SolidStore.solids) {
+    if (!solid.visible) continue;
+    const buf = SolidGPU.buffers.get(solid.id);
+    if (!buf || !buf.gl || !buf.vert) continue;
+    const solidRGB = hexToRGB(solid.color || '#00e87a');
+    // Solid faces
+    gl.useProgram(glProgSolid);
+    setGLUniforms(glProgSolid, solidRGB, ident, light, modeVal);
+    const aPosS  = gl.getAttribLocation(glProgSolid, 'aPos');
+    const aNormS = gl.getAttribLocation(glProgSolid, 'aNorm');
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf.vert);
+    gl.enableVertexAttribArray(aPosS);  gl.vertexAttribPointer(aPosS,  3, gl.FLOAT, false, 24, 0);
+    gl.enableVertexAttribArray(aNormS); gl.vertexAttribPointer(aNormS, 3, gl.FLOAT, false, 24, 12);
+    gl.drawArrays(gl.TRIANGLES, 0, buf.triCount * 3);
+    // Solid edges
+    gl.useProgram(glProgEdge);
+    setGLUniforms(glProgEdge, solidRGB, ident, light, modeVal);
+    const aPosE2 = gl.getAttribLocation(glProgEdge, 'aPos');
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf.edge);
+    gl.enableVertexAttribArray(aPosE2);
+    gl.vertexAttribPointer(aPosE2, 3, gl.FLOAT, false, 12, 0);
+    gl.drawArrays(gl.LINES, 0, buf.edgePairs * 2);
+    gl.disableVertexAttribArray(aPosS); gl.disableVertexAttribArray(aNormS); gl.disableVertexAttribArray(aPosE2);
+  }
+
+  // ── Mesh pass (STL imports via MeshStore) ────────────────────
   if (!glMeshBuffers || !glMeshBuffers.triCount) return;
 
-  // ── Solid pass ──
   gl.useProgram(glProgSolid);
   setGLUniforms(glProgSolid, accentRGB, ident, light, modeVal);
   const aPos  = gl.getAttribLocation(glProgSolid, 'aPos');
@@ -4722,7 +4880,6 @@ function renderWebGL2(w, h, modeVal, accentRGB) {
   gl.enableVertexAttribArray(aNorm); gl.vertexAttribPointer(aNorm, 3, gl.FLOAT, false, 24, 12);
   gl.drawArrays(gl.TRIANGLES, 0, glMeshBuffers.triCount * 3);
 
-  // ── Edge pass ──
   gl.useProgram(glProgEdge);
   setGLUniforms(glProgEdge, accentRGB, ident, light, modeVal);
   const aPosE = gl.getAttribLocation(glProgEdge, 'aPos');
@@ -4756,9 +4913,34 @@ function setGLUniforms(prog, color, model, light, mode) {
 function renderCanvas2DSoftware(w, h, modeVal) {
   if (!ctx3d) return;
   ctx3d.clearRect(0, 0, w, h);
-  if (!MeshStore.meshes.length) return;
+  const hasSolids = SolidStore.solids.some(s => { const b=SolidGPU.buffers.get(s.id); return s.visible&&b&&b.canvas2d; });
+  if (!MeshStore.meshes.length && !hasSolids) return;
 
   updateCam3Matrices();
+
+  // ── SolidStore solids (push-pull extrusions) ──────────────────
+  for (const solid of SolidStore.solids) {
+    if (!solid.visible) continue;
+    const buf = SolidGPU.buffers.get(solid.id);
+    if (!buf || !buf.canvas2d || !buf.tris) continue;
+    const sr=parseInt(solid.color.slice(1,3),16);
+    const sg=parseInt(solid.color.slice(3,5),16);
+    const sb=parseInt(solid.color.slice(5,7),16);
+    ctx3d.strokeStyle = solid.color; ctx3d.lineWidth = 0.5;
+    for (const tri of buf.tris) {
+      const v=tri.verts; const pts=v.map(p=>worldToScreen3D(p.x,p.y,p.z));
+      const dx1=pts[1][0]-pts[0][0],dy1=pts[1][1]-pts[0][1];
+      const dx2=pts[2][0]-pts[0][0],dy2=pts[2][1]-pts[0][1];
+      const cross=dx1*dy2-dy1*dx2;
+      if (modeVal<0.5) {
+        const lightZ=tri.normal?tri.normal.z:0; const bright=0.2+Math.abs(lightZ)*0.7;
+        ctx3d.fillStyle=`rgba(${Math.round(sr*bright)},${Math.round(sg*bright)},${Math.round(sb*bright)},0.75)`;
+        if(cross>0){ctx3d.beginPath();ctx3d.moveTo(pts[0][0],pts[0][1]);ctx3d.lineTo(pts[1][0],pts[1][1]);ctx3d.lineTo(pts[2][0],pts[2][1]);ctx3d.closePath();ctx3d.fill();}
+      }
+      ctx3d.beginPath();ctx3d.moveTo(pts[0][0],pts[0][1]);ctx3d.lineTo(pts[1][0],pts[1][1]);ctx3d.lineTo(pts[2][0],pts[2][1]);ctx3d.closePath();
+      ctx3d.globalAlpha=modeVal>0.5?0.85:0.25; ctx3d.stroke(); ctx3d.globalAlpha=1;
+    }
+  }
 
   for (const mesh of MeshStore.meshes) {
     if (!mesh.visible) continue;
@@ -4839,7 +5021,7 @@ function drawWorkplaneGrid2D() {
 
 
 // ── 3D / 2D MODE SWITCHING ──────────────────────────────
-function is3DMode() { return MeshStore.meshes.length > 0; }
+function is3DMode() { return MeshStore.meshes.length > 0 || SolidStore.solids.length > 0; }
 
 // Override commitImport3D to use 3D mesh pipeline
 const _orig_commitImport3D = commitImport3D;
@@ -6000,21 +6182,20 @@ function init3DOrbitControls() {
   let panStart = null;
 
   cw.addEventListener('mousedown', (e) => {
-    if (!is3DMode()) return;
     const rect = cw.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    if (e.button === 0) {
+    if (e.button === 2) {  // Right-click → orbit always
       Arcball.startDrag(x, y, cw.clientWidth, cw.clientHeight);
       e.preventDefault();
-    } else if (e.button === 1 || e.button === 2) {
+    } else if (e.button === 1) {  // Middle → pan
       panStart = { x: e.clientX, y: e.clientY };
       e.preventDefault();
     }
+    // Left (button 0): passes through to main-canvas for drawing
   });
 
   window.addEventListener('mousemove', (e) => {
-    if (!is3DMode()) return;
     const cw2 = document.getElementById('canvas-wrap');
     const rect = cw2.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -6041,7 +6222,6 @@ function init3DOrbitControls() {
   cw.addEventListener('contextmenu', (e) => { if (is3DMode()) e.preventDefault(); });
 
   cw.addEventListener('wheel', (e) => {
-    if (!is3DMode()) return;
     e.preventDefault();
     Arcball.zoom(e.deltaY);
     render3D();
@@ -6052,28 +6232,21 @@ function init3DOrbitControls() {
   let lastPinchDist = 0;
 
   cw.addEventListener('touchstart', (e) => {
-    if (!is3DMode()) return;
-    e.preventDefault();
     const cw2 = document.getElementById('canvas-wrap');
-    if (e.touches.length === 1) {
-      const t = e.touches[0];
-      Arcball.startDrag(t.clientX, t.clientY, cw2.clientWidth, cw2.clientHeight);
-    } else if (e.touches.length === 2) {
+    if (e.touches.length === 2) {  // Two-finger → orbit/zoom
+      e.preventDefault();
       Arcball.endDrag();
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       lastPinchDist = Math.sqrt(dx*dx+dy*dy);
     }
+    // Single finger passes through to main-canvas for drawing
   }, { passive: false });
 
   cw.addEventListener('touchmove', (e) => {
-    if (!is3DMode()) return;
-    e.preventDefault();
     const cw2 = document.getElementById('canvas-wrap');
-    if (e.touches.length === 1 && Arcball._dragStart) {
-      const t = e.touches[0];
-      if (Arcball.drag(t.clientX, t.clientY, cw2.clientWidth, cw2.clientHeight)) render3D();
-    } else if (e.touches.length === 2) {
+    if (e.touches.length === 2) {
+      e.preventDefault();
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       const dist = Math.sqrt(dx*dx+dy*dy);
@@ -6139,7 +6312,10 @@ const SolidGPU = {
   destroy(id) {
     const b = this.buffers.get(id);
     if (!b) return;
-    if (b.vert && b.vert.destroy) { b.vert.destroy(); b.edge.destroy(); }
+    if (b.vert) {
+      if (b.vert.destroy) { b.vert.destroy(); b.edge.destroy(); } // WebGPU
+      else if (gl) { gl.deleteBuffer(b.vert); gl.deleteBuffer(b.edge); } // WebGL2
+    }
     this.buffers.delete(id);
   },
 
@@ -6717,7 +6893,7 @@ window.commitImport3D = function() {
 // ── RENDER OVERRIDE: 2D + 3D ────────────────────────────────
 (function() {
   const _base = render;
-  window.render = function() { _base(); if (is3DMode()) render3D(); };
+  window.render = function() { _base(); render3D(); renderSketch3D(); };
 })();
 
 // ── INIT ────────────────────────────────────────────────
@@ -6982,13 +7158,17 @@ resizeCanvas();
           initPhase3();
       initPhase4();
       uploadGridToGPU();
+      // Set iso view and render AFTER canvas3d and canvasSketch are ready
+      setView3D('iso');
+      render3D();
+      renderSketch3D();
     });
     setTimeout(()=>{
       GeoMemory.addLine(-15,0,15,0);
       GeoMemory.addLine(0,-15,0,15);
       document.getElementById('main-canvas').style.opacity = '1';
       render();
-      showToast('KUBE v1.0 · Import .STL to enter 3D · Tab = Solid/Mesh');
+      showToast('KUBE v1.0 · Draw on grid · Right-drag=Orbit · E=Extrude · Import STL');
     },100);
   });
 });
